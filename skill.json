@@ -1,0 +1,236 @@
+{
+  "name": "反割韭菜",
+  "name_en": "anti-mlm-analyzer",
+  "description": "分析课程宣传、投资理财、电商创业等12大场景，判断是否为割韭菜陷阱，提供多维度风险评估和决策建议",
+  "version": "2.0",
+  "category": "实用工具",
+  "tags": ["防骗", "消费保护", "课程分析", "投资风险", "反传销"],
+  "icon": "🔍",
+
+  "capabilities": {
+    "input_types": ["text", "image", "url"],
+    "multimodal": true,
+    "web_search": true,
+    "image_understanding": true
+  },
+
+  "prompts": {
+    "system": "你是一个专业的反割韭菜分析助手。你的职责是帮助用户识别可能存在欺诈风险的内容，保护用户免受经济损失。",
+
+    "analysis_framework": "见 skill_prompt.py 中的 ANALYSIS_PROMPT_TEMPLATE",
+
+    "output_format": "JSON格式，详见 skill_prompt.py"
+  },
+
+  "scam_scenarios": [
+    {
+      "id": "course_training",
+      "name": "课程培训",
+      "description": "知识付费、技能培训、训练营等",
+      "high_risk_keywords": ["轻松月入", "年薪百万", "财富自由"],
+      "key_check": "讲师资质、课程大纲、价格合理性"
+    },
+    {
+      "id": "investment_finance",
+      "name": "投资理财",
+      "description": "炒股、基金、股票、理财课程",
+      "high_risk_keywords": ["稳赚不赔", "内幕消息", "保本", "日赚"],
+      "key_check": "是否有牌照、是否承诺收益、是否为正规渠道"
+    },
+    {
+      "id": "e-commerce",
+      "name": "电商创业",
+      "description": "淘宝、拼多多、直播带货、抖音变现",
+      "high_risk_keywords": ["日出千单", "月入过万", "无货源"],
+      "key_check": "是否刷单、是否夸大效果、是否无货源模式"
+    },
+    {
+      "id": "side_job",
+      "name": "副业兼职",
+      "description": "打字员、快递录入、APP试玩、问卷调查",
+      "high_risk_keywords": ["简单高薪", "日结", "适合宝妈"],
+      "key_check": "是否需要押金、是否变相拉人头"
+    },
+    {
+      "id": "health_beauty",
+      "name": "健康减肥",
+      "description": "减肥产品、保健品、医美服务",
+      "high_risk_keywords": ["一周瘦十斤", "不节食不运动", "无效退款"],
+      "key_check": "是否有资质、是否三无产品、是否夸大效果"
+    },
+    {
+      "id": "emotion_relationship",
+      "name": "情感挽回",
+      "description": "挽回课程、脱单课程、恋爱指导",
+      "high_risk_keywords": ["100%挽回", "包成功", "私密教学"],
+      "key_check": "是否利用焦虑、是否有真实案例"
+    },
+    {
+      "id": "education_cert",
+      "name": "学历考证",
+      "description": "学历提升、证书考试、代考包过",
+      "high_risk_keywords": ["不过退款", "内部渠道", "VIP班"],
+      "key_check": "是否正规渠道、是否有学籍、是否包过骗局"
+    },
+    {
+      "id": "franchise_startup",
+      "name": "创业加盟",
+      "description": "招商加盟、连锁代理、合伙人",
+      "high_risk_keywords": ["小投资大回报", "总部扶持", "轻松当老板"],
+      "key_check": "是否有特许经营资质、是否圈钱跑路"
+    },
+    {
+      "id": "job_hunting",
+      "name": "求职就业",
+      "description": "简历优化、面试培训、内推服务",
+      "high_risk_keywords": ["保offer", "不过退款", "内部推荐"],
+      "key_check": "是否收费、是否正规、是否保证offer"
+    },
+    {
+      "id": "pyramid_scheme",
+      "name": "传销拉人头",
+      "description": "拉人头、发展下线、团队计酬",
+      "high_risk_keywords": ["躺赚", "管道收入", "被动收益", "裂变"],
+      "key_check": "是否拉人头、是否层级返利 - 立即远离！",
+      "warning": "涉嫌违法，务必立即远离并报警"
+    },
+    {
+      "id": "cryptocurrency",
+      "name": "数字货币",
+      "description": "区块链、虚拟货币、炒币课程",
+      "high_risk_keywords": ["百倍币", "ICO", "IEO", "私募", "一级市场"],
+      "key_check": "是否空气币、是否资金盘、是否割韭菜"
+    },
+    {
+      "id": "fengshui",
+      "name": "风水玄学",
+      "description": "风水算命、易经起名、化解改运",
+      "high_risk_keywords": ["大师", "高人", "密传", "开光", "转运"],
+      "key_check": "理性对待，不要迷信"
+    }
+  ],
+
+  "risk_keywords": {
+    "income_promise": {
+      "name": "收益承诺类",
+      "weight": 20,
+      "keywords": ["躺赚", "日入过万", "月入十万", "年薪百万", "财富自由", "稳赚不赔", "100%赚钱", "保赚", "一定赚", "日赚", "月赚", "睡后收入", "被动收入", "快速致富", "一本万利", "低成本高回报"]
+    },
+    "scarcity_marketing": {
+      "name": "稀缺营销类",
+      "weight": 10,
+      "keywords": ["限时特价", "名额有限", "错过等一年", "即将涨价", "限量名额", "仅限今天", "最后机会", "紧急招募", "停止招生", "恢复原价"]
+    },
+    "identity_packaging": {
+      "name": "身份包装类",
+      "weight": 5,
+      "keywords": ["大师", "教父", "之神", "第一人", "创始之神", "领袖", "传奇", "顶级", "天花板", "鼻祖", "之父", "大咖", "资深", "金牌", "网红", "大V"]
+    },
+    "anxiety_creation": {
+      "name": "焦虑制造类",
+      "weight": 15,
+      "keywords": ["普通人也能", "改变命运", "逆袭人生", "不学习就被淘汰", "跟不上时代", "即将失业", "被同龄人抛弃", "阶层固化", "寒门难出贵子", "别让孩子输", "对不起家人"]
+    },
+    "screenshot_induction": {
+      "name": "截图诱导类",
+      "weight": 15,
+      "keywords": ["收入截图", "转账截图", "聊天截图", "学员反馈", "提现截图", "晒单", "战绩", "喜报", "成交记录", "收款截图", "银行到账"]
+    },
+    "pyramid_scheme": {
+      "name": "拉人头/传销类",
+      "weight": 30,
+      "keywords": ["拉人头", "发展下线", "团队计酬", "层级", "分销", "代理", "加盟", "合伙人", "联创", "联合创始人", "推荐奖励", "邀请返利", "分享赚佣金", "团队奖励", "层级返点"]
+    },
+    "entry_fee": {
+      "name": "入门费用类",
+      "weight": 25,
+      "keywords": ["入门费", "加盟费", "保证金", "会员费", "代理费", "培训费", "资料费", "激活费", "认证费", "年费", "预付款", "定金", "押金", "诚意金", "服务费"]
+    }
+  },
+
+  "red_flags": [
+    "要求拉人头、发展下线、层层返利",
+    "收取入门费、加盟费、会员费等",
+    "承诺躺赚、被动收入、日入过万",
+    "声称内部消息、特殊渠道、官方授权",
+    "收款到个人账户而非对公账户",
+    "不签合同或合同条款明显有利于卖方",
+    "限制人身自由或限制退出"
+  ],
+
+  "analysis_dimensions": {
+    "text_risk": {
+      "description": "文本风险分析",
+      "scoring": "收益承诺*20 + 稀缺营销*10 + 身份包装*5 + 焦虑制造*15 + 截图诱导*15 + 拉人头*30 + 入门费*25"
+    },
+    "scenario_check": {
+      "description": "场景化分析",
+      "method": "根据识别的场景，重点检查对应的高风险特征"
+    },
+    "source_verification": {
+      "description": "来源核查",
+      "checks": ["公司是否真实", "讲师背景", "负面新闻搜索"]
+    },
+    "user_profiling": {
+      "description": "用户画像",
+      "indicators": ["是否急切", "是否缺乏经验", "是否焦虑", "是否理性"]
+    }
+  },
+
+  "risk_levels": {
+    "very_high": {
+      "score_range": "75-100",
+      "conditions": ["检测到拉人头/传销特征", "评分>=75"],
+      "recommendation": "强烈远离",
+      "reason": "检测到典型割韭菜或传销特征，存在明显欺诈嫌疑"
+    },
+    "high": {
+      "score_range": "50-74",
+      "recommendation": "高度警惕",
+      "reason": "存在多项可疑特征，建议进一步核实"
+    },
+    "medium": {
+      "score_range": "25-49",
+      "recommendation": "谨慎考虑",
+      "reason": "未发现明显欺诈特征，但需保持警惕"
+    },
+    "low": {
+      "score_range": "0-24",
+      "recommendation": "理性对待",
+      "reason": "未检测到明显风险特征"
+    }
+  },
+
+  "usage_examples": [
+    {
+      "scenario": "课程培训",
+      "input": "text",
+      "content": "好消息！某导师亲授，普通人也能轻松月入十万，限时特价只要999，名额有限！"
+    },
+    {
+      "scenario": "投资理财",
+      "input": "url",
+      "description": "用户发送股票课程链接",
+      "action": "访问链接 → 提取内容 → 检查是否承诺收益"
+    },
+    {
+      "scenario": "传销拉人头",
+      "input": "text",
+      "content": "财富管道项目！拉人头发展下线，团队计酬，月入百万！一起躺赚！",
+      "expected_result": "立即标记为极高风险，建议报警"
+    },
+    {
+      "scenario": "电商创业",
+      "input": "image",
+      "description": "用户发送淘宝无货源课程海报截图"
+    }
+  ],
+
+  "notes": [
+    "此技能设计用于CLAW等多模态AI助手",
+    "图片识别和联网搜索由宿主模型提供",
+    "本框架提供分析逻辑和判断标准",
+    "最终判断应结合实时网络信息",
+    "对于疑似传销的情况，明确告知用户这是违法行为"
+  ]
+}
