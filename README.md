@@ -4,6 +4,32 @@
 
 ---
 
+## OpenClaw安装
+
+### 方式一：GitHub直接安装
+
+在OpenClaw中执行：
+```
+/skill install https://github.com/hanjin714/anti-mlm-skill
+```
+
+或使用简化命令：
+```
+/skill install anti-mlm-skill
+```
+
+### 方式二：手动导入
+
+1. 下载本仓库的 `skill.json` 文件
+2. 在OpenClaw中导入：设置 → 技能管理 → 导入技能 → 选择 `skill.json`
+
+### 方式三：复制Prompt
+
+1. 复制本仓库的 `skill_prompt.py` 中的 `ANALYSIS_PROMPT_TEMPLATE`
+2. 在OpenClaw中创建自定义技能，粘贴作为系统提示词
+
+---
+
 ## 核心功能
 
 | 功能 | 说明 |
